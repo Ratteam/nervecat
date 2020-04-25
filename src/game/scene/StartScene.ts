@@ -1,0 +1,3 @@
+class StartScene extends BaseScene{
+    
+}

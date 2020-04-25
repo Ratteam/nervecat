@@ -1,0 +1,3 @@
+class EndScene extends BaseScene{
+    
+}

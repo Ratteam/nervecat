@@ -1,23 +1,110 @@
 {
-	"groups":[
-	{
-		"keys":"bg_jpg,egret_icon_png,description_json",
-		"name":"preload"
-	}],
-	"resources":[
-	{
-		"name":"bg_jpg",
-		"type":"image",
-		"url":"assets/bg.jpg"
-	},
-	{
-		"name":"egret_icon_png",
-		"type":"image",
-		"url":"assets/egret_icon.png"
-	},
-	{
-		"name":"description_json",
-		"type":"json",
-		"url":"config/description.json"
-	}]
+	"groups": [
+		{
+			"keys": "bg2_jpg,btn_back_png,btn_next_png,btn_replay_png,btn_start_png,cat_loser_json,cat_loser_png,cat_normal_json,cat_normal_png,cat_start_bg_png,end_tip_fail_png,end_tip_success_png,grid_white_png,grid_yellow_png,fail_mp3,go_mp3,success_mp3",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/bg.jpg",
+			"type": "image",
+			"name": "bg_jpg"
+		},
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/img/bg.jpg",
+			"type": "image",
+			"name": "bg2_jpg"
+		},
+		{
+			"url": "assets/img/btn_back.png",
+			"type": "image",
+			"name": "btn_back_png"
+		},
+		{
+			"url": "assets/img/btn_next.png",
+			"type": "image",
+			"name": "btn_next_png"
+		},
+		{
+			"url": "assets/img/btn_replay.png",
+			"type": "image",
+			"name": "btn_replay_png"
+		},
+		{
+			"url": "assets/img/btn_start.png",
+			"type": "image",
+			"name": "btn_start_png"
+		},
+		{
+			"url": "assets/img/cat_loser.json",
+			"type": "json",
+			"name": "cat_loser_json"
+		},
+		{
+			"url": "assets/img/cat_loser.png",
+			"type": "image",
+			"name": "cat_loser_png"
+		},
+		{
+			"url": "assets/img/cat_normal.json",
+			"type": "json",
+			"name": "cat_normal_json"
+		},
+		{
+			"url": "assets/img/cat_normal.png",
+			"type": "image",
+			"name": "cat_normal_png"
+		},
+		{
+			"url": "assets/img/cat_start_bg.png",
+			"type": "image",
+			"name": "cat_start_bg_png"
+		},
+		{
+			"url": "assets/img/end_tip_fail.png",
+			"type": "image",
+			"name": "end_tip_fail_png"
+		},
+		{
+			"url": "assets/img/end_tip_success.png",
+			"type": "image",
+			"name": "end_tip_success_png"
+		},
+		{
+			"url": "assets/img/grid_white.png",
+			"type": "image",
+			"name": "grid_white_png"
+		},
+		{
+			"url": "assets/img/grid_yellow.png",
+			"type": "image",
+			"name": "grid_yellow_png"
+		},
+		{
+			"url": "assets/audio/fail.mp3",
+			"type": "sound",
+			"name": "fail_mp3"
+		},
+		{
+			"url": "assets/audio/go.mp3",
+			"type": "sound",
+			"name": "go_mp3"
+		},
+		{
+			"url": "assets/audio/success.mp3",
+			"type": "sound",
+			"name": "success_mp3"
+		}
+	]
 }

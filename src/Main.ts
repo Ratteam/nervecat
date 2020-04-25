@@ -28,162 +28,68 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Main extends egret.DisplayObjectContainer {
-
-
-
+    /**
+    * 构造函数，创建对象时初始化对象
+    */
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
-
+    /**
+    * 访问构造函数结束后，通过addEventListener指定的回调调用该函数
+    */
     private onAddToStage(event: egret.Event) {
-
-        egret.lifecycle.addLifecycleListener((context) => {
-            // custom lifecycle plugin
-
-            context.onUpdate = () => {
-
-            }
-        })
-
+        // 生命周期管理器：egret.lifecycle
+        // 在游戏中，用户可以切换应用的前后台。在用户进入后台时，关闭游戏逻辑、渲染逻辑、背景音乐，可以保证更好的用户体验。
         egret.lifecycle.onPause = () => {
-            egret.ticker.pause();
+            console.log("app 进入后台");
+            egret.ticker.pause(); // 关闭渲染与心跳
         }
-
         egret.lifecycle.onResume = () => {
-            egret.ticker.resume();
+            console.log("app 进入前台");
+            egret.ticker.resume(); // 打开渲染与心跳
         }
-
+        // 调用开始游戏方法，捕捉异常
         this.runGame().catch(e => {
             console.log(e);
         })
-
-
-
     }
-
+    /**
+     * 开始游戏方法
+     */
     private async runGame() {
+        // 加载资源
         await this.loadResource()
-        this.createGameScene();
-        const result = await RES.getResAsync("description_json")
-        this.startAnimation(result);
-        await platform.login();
-        const userInfo = await platform.getUserInfo();
-        console.log(userInfo);
-
+        // 创建游戏场景
+        this.createGameScene()
     }
-
+    /**
+     * 加载资源文件
+     */
     private async loadResource() {
         try {
-            const loadingView = new LoadingUI();
-            this.stage.addChild(loadingView);
-            await RES.loadConfig("resource/default.res.json", "resource/");
-            await RES.loadGroup("preload", 0, loadingView);
-            this.stage.removeChild(loadingView);
+            // loading显示
+            const loadingView = new LoadingUI()
+            this.stage.addChild(loadingView)
+            // 加载资源配置文件
+            await RES.loadConfig("resource/default.res.json", "resource/")
+            // 指定资源组
+            await RES.loadGroup("preload", 0, loadingView)
+            // loading隐藏
+            this.stage.removeChild(loadingView)
         }
         catch (e) {
-            console.error(e);
+            console.error(e)
         }
     }
-
-    private textfield: egret.TextField;
-
     /**
      * 创建游戏场景
-     * Create a game scene
      */
     private createGameScene() {
-        let sky = this.createBitmapByName("bg_jpg");
-        this.addChild(sky);
-        let stageW = this.stage.stageWidth;
-        let stageH = this.stage.stageHeight;
-        sky.width = stageW;
-        sky.height = stageH;
-
-        let topMask = new egret.Shape();
-        topMask.graphics.beginFill(0x000000, 0.5);
-        topMask.graphics.drawRect(0, 0, stageW, 172);
-        topMask.graphics.endFill();
-        topMask.y = 33;
-        this.addChild(topMask);
-
-        let icon = this.createBitmapByName("egret_icon_png");
-        this.addChild(icon);
-        icon.x = 26;
-        icon.y = 33;
-
-        let line = new egret.Shape();
-        line.graphics.lineStyle(2, 0xffffff);
-        line.graphics.moveTo(0, 0);
-        line.graphics.lineTo(0, 117);
-        line.graphics.endFill();
-        line.x = 172;
-        line.y = 61;
-        this.addChild(line);
-
-
-        let colorLabel = new egret.TextField();
-        colorLabel.textColor = 0xffffff;
-        colorLabel.width = stageW - 172;
-        colorLabel.textAlign = "center";
-        colorLabel.text = "Hello Egret";
-        colorLabel.size = 24;
-        colorLabel.x = 172;
-        colorLabel.y = 80;
-        this.addChild(colorLabel);
-
-        let textfield = new egret.TextField();
-        this.addChild(textfield);
-        textfield.alpha = 0;
-        textfield.width = stageW - 172;
-        textfield.textAlign = egret.HorizontalAlign.CENTER;
-        textfield.size = 24;
-        textfield.textColor = 0xffffff;
-        textfield.x = 172;
-        textfield.y = 135;
-        this.textfield = textfield;
-
-
-    }
-
-    /**
-     * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
-     * Create a Bitmap object according to name keyword.As for the property of name please refer to the configuration file of resources/resource.json.
-     */
-    private createBitmapByName(name: string) {
-        let result = new egret.Bitmap();
-        let texture: egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    }
-
-    /**
-     * 描述文件加载成功，开始播放动画
-     * Description file loading is successful, start to play the animation
-     */
-    private startAnimation(result: string[]) {
-        let parser = new egret.HtmlTextParser();
-
-        let textflowArr = result.map(text => parser.parse(text));
-        let textfield = this.textfield;
-        let count = -1;
-        let change = () => {
-            count++;
-            if (count >= textflowArr.length) {
-                count = 0;
-            }
-            let textFlow = textflowArr[count];
-
-            // 切换描述内容
-            // Switch to described content
-            textfield.textFlow = textFlow;
-            let tw = egret.Tween.get(textfield);
-            tw.to({ "alpha": 1 }, 200);
-            tw.wait(2000);
-            tw.to({ "alpha": 0 }, 200);
-            tw.call(change, this);
-        };
-
-        change();
+        let container: egret.DisplayObjectContainer = new egret.DisplayObjectContainer()
+        this.addChild(container)
+        let bg: egret.Bitmap = GameUtil.createBitmapByName('bg2','jpg')
+        container.addChild(bg);
+        
     }
 }
