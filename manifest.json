@@ -11,13 +11,16 @@
 	],
 	"game": [
 		"bin-debug/game/scene/BaseScene.js",
-		"bin-debug/LoadingUI.js",
-		"bin-debug/Main.js",
-		"bin-debug/Platform.js",
-		"bin-debug/common/GameUtil.js",
-		"bin-debug/game/SceneController.js",
-		"bin-debug/game/scene/EndScene.js",
 		"bin-debug/game/scene/PlayScene.js",
+		"bin-debug/game/SceneController.js",
+		"bin-debug/common/GameData.js",
+		"bin-debug/common/GameUtil.js",
+		"bin-debug/common/Point.js",
+		"bin-debug/Main.js",
+		"bin-debug/game/elment/Cat.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/game/scene/EndScene.js",
+		"bin-debug/Platform.js",
 		"bin-debug/game/scene/StartScene.js"
 	]
 }

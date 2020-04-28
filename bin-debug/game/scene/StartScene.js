@@ -13,6 +13,21 @@ var StartScene = (function (_super) {
     function StartScene() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    StartScene.prototype.initView = function () {
+        var cat = GameUtil.createBitmapByName('cat_start_bg_png');
+        this.addChild(cat);
+        cat.x = (GameUtil.getStageWidth() - cat.width) / 2;
+        cat.y = (GameUtil.getStageHeight() - cat.height) / 2 + 100;
+        var startBtn = GameUtil.createBitmapByName('btn_start_png');
+        this.addChild(startBtn);
+        startBtn.x = (GameUtil.getStageWidth() - startBtn.width) / 2;
+        startBtn.y = cat.y + cat.height;
+        GameUtil.bitmapToBtn(startBtn, function () {
+            console.log("开始游戏");
+            n.GameData.level = 0;
+            SceneController.showPlayScene();
+        });
+    };
     return StartScene;
 }(BaseScene));
 __reflect(StartScene.prototype, "StartScene");

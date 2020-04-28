@@ -19,8 +19,8 @@
 //  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 //  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 //  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICESLOSS OF USE, DATA,
+//  OR PROFITS OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 //  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 //  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -32,8 +32,8 @@ class Main extends egret.DisplayObjectContainer {
     * 构造函数，创建对象时初始化对象
     */
     public constructor() {
-        super();
-        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
+        super()
+        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this)
     }
     /**
     * 访问构造函数结束后，通过addEventListener指定的回调调用该函数
@@ -42,16 +42,16 @@ class Main extends egret.DisplayObjectContainer {
         // 生命周期管理器：egret.lifecycle
         // 在游戏中，用户可以切换应用的前后台。在用户进入后台时，关闭游戏逻辑、渲染逻辑、背景音乐，可以保证更好的用户体验。
         egret.lifecycle.onPause = () => {
-            console.log("app 进入后台");
-            egret.ticker.pause(); // 关闭渲染与心跳
+            console.log("app 进入后台")
+            egret.ticker.pause() // 关闭渲染与心跳
         }
         egret.lifecycle.onResume = () => {
-            console.log("app 进入前台");
-            egret.ticker.resume(); // 打开渲染与心跳
+            console.log("app 进入前台")
+            egret.ticker.resume() // 打开渲染与心跳
         }
         // 调用开始游戏方法，捕捉异常
         this.runGame().catch(e => {
-            console.log(e);
+            console.log(e)
         })
     }
     /**
@@ -88,8 +88,10 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {
         let container: egret.DisplayObjectContainer = new egret.DisplayObjectContainer()
         this.addChild(container)
-        let bg: egret.Bitmap = GameUtil.createBitmapByName('bg2','jpg')
-        container.addChild(bg);
-        
+        let bg: egret.Bitmap = GameUtil.createBitmapByName('bg2_jpg')
+        container.addChild(bg)
+        // 访问instance实例化SceneController
+        SceneController.instance.setStage(container)
+        SceneController.initGame()
     }
 }

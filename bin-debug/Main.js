@@ -19,8 +19,8 @@
 //  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 //  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 //  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICESLOSS OF USE, DATA,
+//  OR PROFITS OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 //  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 //  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -166,8 +166,11 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         var container = new egret.DisplayObjectContainer();
         this.addChild(container);
-        var bg = GameUtil.createBitmapByName('bg2', 'jpg');
+        var bg = GameUtil.createBitmapByName('bg2_jpg');
         container.addChild(bg);
+        // 访问instance实例化SceneController
+        SceneController.instance.setStage(container);
+        SceneController.initGame();
     };
     return Main;
 }(egret.DisplayObjectContainer));

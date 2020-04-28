@@ -1,0 +1,7 @@
+class SearchResult{
+
+}
+
+class Cat{
+    
+}
