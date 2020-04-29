@@ -18,6 +18,7 @@
 		"bin-debug/common/Point.js",
 		"bin-debug/Main.js",
 		"bin-debug/game/elment/Cat.js",
+		"bin-debug/game/elment/GridNode.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/game/scene/EndScene.js",
 		"bin-debug/Platform.js",

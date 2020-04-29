@@ -74,5 +74,11 @@ namespace n {
          * 玩家走的步数
          */
         public static step: number = 0
+        /**
+         * 存放格子数据
+         */
+        public static gridNodeList: Array<Array<GridNode>>
+        // 格子的边距
+        public static gridMargin: number = 10
     }
 }

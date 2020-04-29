@@ -80,6 +80,8 @@ var n;
          * 玩家走的步数
          */
         GameData.step = 0;
+        // 格子的边距
+        GameData.gridMargin = 10;
         return GameData;
     }());
     n.GameData = GameData;

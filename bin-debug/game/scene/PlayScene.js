@@ -22,12 +22,54 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.initView = function () {
         this.sound = RES.getRes('go_mp3');
         this.catRunning = false;
-        // this.createGriNode()
-        // this.createBarrier()
-        // this.createCat()
+        this.createGriNode();
+        this.createBarrier(n.GameData.barrierNumber);
+        this.createCat();
         this.x = (GameUtil.getStageWidth() - this.width) / 2;
         this.y = GameUtil.getStageHeight() / 2.5;
         SceneController.showLevelTip();
+    };
+    PlayScene.prototype.canRun = function () {
+        return !this.catRunning;
+    };
+    /**
+     * 创建猫
+     */
+    PlayScene.prototype.createCat = function () {
+    };
+    /**
+     * 创建屏障
+     */
+    PlayScene.prototype.createBarrier = function (num) {
+        while (num) {
+            var i = Math.floor(Math.random() * 100 % n.GameData.row);
+            var j = Math.floor(Math.random() * 100 % n.GameData.col);
+            var gridNode = n.GameData.gridNodeList[i][j];
+            if (i != Math.floor(n.GameData.row / 2) && j != Math.floor(n.GameData.col / 2) && gridNode.getStatus() === GridNodeStatus.AVAILABLE) {
+                // 设置状态为UNAVAILABLE
+                gridNode.setStatus(GridNodeStatus.UNAVAILABLE);
+                num--;
+            }
+        }
+    };
+    /**
+     * 创建地图
+     */
+    PlayScene.prototype.createGriNode = function () {
+        n.GameData.gridNodeList = new Array(n.GameData.row);
+        var gridNodeSize = GameUtil.getStageWidth() / (n.GameData.row + 1) - n.GameData.gridMargin;
+        for (var i = 0; i < n.GameData.row; ++i) {
+            n.GameData.gridNodeList[i] = new Array(n.GameData.col);
+            var indet = (i % 2) * (gridNodeSize / 2);
+            for (var j = 0; j < n.GameData.col; ++j) {
+                var x = indet + j * (gridNodeSize + n.GameData.gridMargin);
+                var y = i * gridNodeSize;
+                n.GameData.gridNodeList[i][j] = new GridNode(new Point(i, j), new Point(x, y), gridNodeSize, this);
+                n.GameData.gridNodeList[i][j].setStatus(GridNodeStatus.AVAILABLE);
+                this.addChild(n.GameData.gridNodeList[i][j]);
+            }
+        }
+        // console.log(n.GameData.gridNodeList)
     };
     return PlayScene;
 }(BaseScene));

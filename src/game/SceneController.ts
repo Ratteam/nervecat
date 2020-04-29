@@ -29,6 +29,21 @@ class SceneController {
     }
     public static showPlayScene() {
         let stage: egret.DisplayObjectContainer = this.instance._stage
+        // 如果有开始游戏场景，移除掉
+        if (this.instance.startScene.parent) {
+            stage.removeChild(this.instance.startScene)
+            this.instance.startScene = new StartScene()
+        }
+        // 如果有结束游戏场景，移除掉
+        if (this.instance.endScene.parent) {
+            stage.removeChild(this.instance.endScene)
+            this.instance.endScene = new EndScene()
+        }
+        // 如果有游戏关卡场景，移除掉
+        if (this.instance.playScene.parent) {
+            stage.removeChild(this.instance.playScene)
+            this.instance.playScene = new PlayScene()
+        }
         let level = n.GameData.level
         if (level >= n.GameData.levelData.length) {
             level = n.GameData.levelData.length - 1
