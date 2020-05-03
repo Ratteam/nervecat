@@ -55,6 +55,10 @@ var SceneController = (function () {
         n.GameData.step = 0;
         stage.addChild(this.instance.playScene);
     };
+    SceneController.showEndScene = function () {
+        var stage = this.instance._stage;
+        stage.addChild(this.instance.endScene);
+    };
     SceneController.showLevelTip = function () {
         var level = n.GameData.level + 1;
         var stage = this.instance._stage;

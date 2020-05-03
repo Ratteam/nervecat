@@ -47,7 +47,7 @@ class SceneController {
         let level = n.GameData.level
         if (level >= n.GameData.levelData.length) {
             level = n.GameData.levelData.length - 1
-            
+
         }
         n.GameData.barrierNumber = n.GameData.levelData[level].barrierNumber
         n.GameData.row = n.GameData.levelData[level].row
@@ -55,6 +55,10 @@ class SceneController {
         n.GameData.overType = OverType.NULL
         n.GameData.step = 0
         stage.addChild(this.instance.playScene)
+    }
+    public static showEndScene() {
+        let stage: egret.DisplayObjectContainer = this.instance._stage
+        stage.addChild(this.instance.endScene)
     }
     public static showLevelTip() {
         let level = n.GameData.level + 1

@@ -29,10 +29,41 @@ var PlayScene = (function (_super) {
         this.y = GameUtil.getStageHeight() / 2.5;
         SceneController.showLevelTip();
     };
+    /**
+     * 游戏结束
+     */
+    PlayScene.prototype.gameOver = function (type) {
+        // 获取结束类型（玩家赢或猫赢）
+        n.GameData.overType = type;
+        // 显示结果
+        SceneController.showEndScene();
+    };
+    PlayScene.prototype.catRun = function (searchResult) {
+        console.log("貓走");
+        if (!searchResult.hasPath) {
+            this.cat.setStatus(CatStatus.UNAVAILABLE);
+        }
+        var nextStep = searchResult.nextStep;
+        if (nextStep.equal(this.cat.getIndex())) {
+            this.gameOver(OverType.PLAYER);
+            return;
+        }
+        this.cat.move(nextStep);
+        if (nextStep.x * nextStep.y === 0 || nextStep.x === n.GameData.row - 1 || nextStep.y === n.GameData.col - 1) {
+            this.gameOver(OverType.CAT);
+            return;
+        }
+        this.catRunning = false;
+    };
     PlayScene.prototype.canRun = function () {
         return !this.catRunning;
     };
     PlayScene.prototype.playerRun = function (nextStep) {
+        console.log("用户走");
+        this.sound.play(0, 1);
+        n.GameData.step++;
+        this.catRunning = true;
+        this.cat.run();
     };
     /**
      * 创建猫

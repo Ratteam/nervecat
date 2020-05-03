@@ -1,8 +1,8 @@
 declare interface PlayListener {
     canRun(): boolean
     playerRun(nextStep: Point): void
-    // catRun(searchResult: SearchResult): void
-    // gameOver(type: number): void
+    catRun(searchResult: SearchResult): void
+    gameOver(type: number): void
 }
 enum OverType {
     NULL = -1, // 无
@@ -23,23 +23,53 @@ class PlayScene extends BaseScene implements PlayListener {
         this.y = GameUtil.getStageHeight() / 2.5
         SceneController.showLevelTip()
     }
+    /**
+     * 游戏结束
+     */
+    public gameOver(type: OverType) {
+        // 获取结束类型（玩家赢或猫赢）
+        n.GameData.overType = type
+        // 显示结果
+        SceneController.showEndScene()
+    }
+    public catRun(searchResult: SearchResult) {
+        console.log("貓走")
+        if (!searchResult.hasPath) {
+            this.cat.setStatus(CatStatus.UNAVAILABLE)
+        }
+        let nextStep = searchResult.nextStep
+        if (nextStep.equal(this.cat.getIndex())) {
+            this.gameOver(OverType.PLAYER)
+            return
+        }
+        this.cat.move(nextStep)
+        if(nextStep.x*nextStep.y===0||nextStep.x===n.GameData.row-1||nextStep.y===n.GameData.col-1){
+            this.gameOver(OverType.CAT)
+            return
+        }
+        this.catRunning = false
+    }
     public canRun() {
         return !this.catRunning
     }
 
-    public playerRun(nextStep:Point){
-
+    public playerRun(nextStep: Point) {
+        console.log("用户走")
+        this.sound.play(0, 1)
+        n.GameData.step++
+        this.catRunning = true
+        this.cat.run()
     }
     /**
      * 创建猫
      */
     private createCat() {
         console.log("创建猫")
-        let i = Math.floor(n.GameData.row/2)
-        let j = Math.floor(n.GameData.col/2)
+        let i = Math.floor(n.GameData.row / 2)
+        let j = Math.floor(n.GameData.col / 2)
         this.cat = new Cat(this)
         this.addChild(this.cat)
-        this.cat.move(new Point(i,j))
+        this.cat.move(new Point(i, j))
     }
     /**
      * 创建屏障
