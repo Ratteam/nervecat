@@ -56,5 +56,14 @@ class GameUtil {
             bitmap.scaleY = 1
         }
     }
+    /**
+     * 根据name关键字创建一个MovieClip对象。name属性请参考resources/resource.json配置文件的内容。
+     */
+    public static createMovieClipByName(name:string): egret.MovieClip {
 
+        let data_stay: any = RES.getRes(name + "_json")
+        let texture_stay: egret.Texture = RES.getRes(name + "_png")
+        let mcFactory_stay: egret.MovieClipDataFactory = new egret.MovieClipDataFactory(data_stay, texture_stay)
+        return new egret.MovieClip(mcFactory_stay.generateMovieClipData(name))
+    }
 }

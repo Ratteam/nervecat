@@ -48,7 +48,7 @@ var SceneController = (function () {
         if (level >= n.GameData.levelData.length) {
             level = n.GameData.levelData.length - 1;
         }
-        n.GameData.barrierNumber = n.GameData.levelData[level].barrierNumer;
+        n.GameData.barrierNumber = n.GameData.levelData[level].barrierNumber;
         n.GameData.row = n.GameData.levelData[level].row;
         n.GameData.col = n.GameData.levelData[level].col;
         n.GameData.overType = OverType.NULL;

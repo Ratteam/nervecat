@@ -19,8 +19,8 @@ var GridNode = (function (_super) {
     function GridNode(index, pos, size, playListener) {
         var _this = _super.call(this) || this;
         _this.gridBg = {
-            white: GameUtil.createBitmapByName('grid_white'),
-            yellow: GameUtil.createBitmapByName('grid_yellow')
+            white: GameUtil.createBitmapByName('grid_white_png'),
+            yellow: GameUtil.createBitmapByName('grid_yellow_png')
         };
         /**
          * 格子的背景

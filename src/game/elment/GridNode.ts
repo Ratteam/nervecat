@@ -9,8 +9,8 @@ class GridNode extends egret.Sprite{
      */
     private status: GridNodeStatus
     private gridBg = {
-        white: GameUtil.createBitmapByName('grid_white'),
-        yellow: GameUtil.createBitmapByName('grid_yellow')
+        white: GameUtil.createBitmapByName('grid_white_png'),
+        yellow: GameUtil.createBitmapByName('grid_yellow_png')
     }
     /**
      * 格子数组中的下标

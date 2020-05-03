@@ -61,6 +61,15 @@ var GameUtil = (function () {
             bitmap.scaleY = 1;
         }
     };
+    /**
+     * 根据name关键字创建一个MovieClip对象。name属性请参考resources/resource.json配置文件的内容。
+     */
+    GameUtil.createMovieClipByName = function (name) {
+        var data_stay = RES.getRes(name + "_json");
+        var texture_stay = RES.getRes(name + "_png");
+        var mcFactory_stay = new egret.MovieClipDataFactory(data_stay, texture_stay);
+        return new egret.MovieClip(mcFactory_stay.generateMovieClipData(name));
+    };
     return GameUtil;
 }());
 __reflect(GameUtil.prototype, "GameUtil");

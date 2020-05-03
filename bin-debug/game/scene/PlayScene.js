@@ -32,15 +32,24 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.canRun = function () {
         return !this.catRunning;
     };
+    PlayScene.prototype.playerRun = function (nextStep) {
+    };
     /**
      * 创建猫
      */
     PlayScene.prototype.createCat = function () {
+        console.log("创建猫");
+        var i = Math.floor(n.GameData.row / 2);
+        var j = Math.floor(n.GameData.col / 2);
+        this.cat = new Cat(this);
+        this.addChild(this.cat);
+        this.cat.move(new Point(i, j));
     };
     /**
      * 创建屏障
      */
     PlayScene.prototype.createBarrier = function (num) {
+        console.log("创建屏障");
         while (num) {
             var i = Math.floor(Math.random() * 100 % n.GameData.row);
             var j = Math.floor(Math.random() * 100 % n.GameData.col);
@@ -56,6 +65,7 @@ var PlayScene = (function (_super) {
      * 创建地图
      */
     PlayScene.prototype.createGriNode = function () {
+        console.log("创建地图");
         n.GameData.gridNodeList = new Array(n.GameData.row);
         var gridNodeSize = GameUtil.getStageWidth() / (n.GameData.row + 1) - n.GameData.gridMargin;
         for (var i = 0; i < n.GameData.row; ++i) {
@@ -69,7 +79,6 @@ var PlayScene = (function (_super) {
                 this.addChild(n.GameData.gridNodeList[i][j]);
             }
         }
-        // console.log(n.GameData.gridNodeList)
     };
     return PlayScene;
 }(BaseScene));

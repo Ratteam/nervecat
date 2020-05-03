@@ -1,6 +1,6 @@
 declare interface PlayListener {
     canRun(): boolean
-    // playerRun(nextStep: Point): void
+    playerRun(nextStep: Point): void
     // catRun(searchResult: SearchResult): void
     // gameOver(type: number): void
 }
@@ -26,16 +26,26 @@ class PlayScene extends BaseScene implements PlayListener {
     public canRun() {
         return !this.catRunning
     }
+
+    public playerRun(nextStep:Point){
+
+    }
     /**
      * 创建猫
      */
     private createCat() {
-
+        console.log("创建猫")
+        let i = Math.floor(n.GameData.row/2)
+        let j = Math.floor(n.GameData.col/2)
+        this.cat = new Cat(this)
+        this.addChild(this.cat)
+        this.cat.move(new Point(i,j))
     }
     /**
      * 创建屏障
      */
     private createBarrier(num: number) {
+        console.log("创建屏障")
         while (num) {
             let i = Math.floor(Math.random() * 100 % n.GameData.row)
             let j = Math.floor(Math.random() * 100 % n.GameData.col)
@@ -51,6 +61,7 @@ class PlayScene extends BaseScene implements PlayListener {
      * 创建地图
      */
     private createGriNode() {
+        console.log("创建地图")
         n.GameData.gridNodeList = new Array<Array<any>>(n.GameData.row)
         let gridNodeSize = GameUtil.getStageWidth() / (n.GameData.row + 1) - n.GameData.gridMargin
         for (let i = 0; i < n.GameData.row; ++i) {
@@ -64,6 +75,5 @@ class PlayScene extends BaseScene implements PlayListener {
                 this.addChild(n.GameData.gridNodeList[i][j])
             }
         }
-        // console.log(n.GameData.gridNodeList)
     }
 }
